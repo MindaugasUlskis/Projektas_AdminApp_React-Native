@@ -14,6 +14,7 @@ export function OrderManagementScreen({ navigation }, props) {
 
   const [order, setOrder] = useState("")
   const [productdata, setProductData] = useState([])
+  const [tableId, setTableId] = useState("11")
 
 
 
@@ -38,6 +39,7 @@ export function OrderManagementScreen({ navigation }, props) {
           }
           setProductData (JSON.parse(JSON.stringify(documentSnapshot.data().Products)))
           setOrder(data)
+          setTableId(data.Table)
           
         });
         
@@ -47,7 +49,6 @@ export function OrderManagementScreen({ navigation }, props) {
   
   newdata()
   
-
 
   return (
     <View style={{ paddingTop: 20, flex: 1 }}>
@@ -72,9 +73,9 @@ export function OrderManagementScreen({ navigation }, props) {
       {productdata.map(item =>
             <Text style = {{paddingLeft:45, paddingBottom:3}}>{item.Title}</Text>)}
             <View style={{alignItems:"center"}}>
-      <ButtonOne title="Order is beeing made" clicked={()=> ChangeDataFunction(route.params.orderID, "Order is beeing made") } ></ButtonOne>
-      <ButtonOne title="Cancel" clicked={()=> ChangeDataFunction(route.params.orderID, "Canceled") } ></ButtonOne>
-      <ButtonOne title="Finished" clicked={()=> ChangeDataFunction(route.params.orderID, "Order is Finished") } ></ButtonOne>
+      <ButtonOne title="Order is beeing made" clicked={()=> ChangeDataFunction(route.params.orderID, "Order is beeing made", tableId) } ></ButtonOne>
+      <ButtonOne title="Cancel" clicked={()=> ChangeDataFunction(route.params.orderID, "Canceled", tableId) } ></ButtonOne>
+      <ButtonOne title="Finished" clicked={()=> ChangeDataFunction(route.params.orderID, "Order is Finished", tableId) } ></ButtonOne>
       <View style={{paddingBottom:20}} ></View>
       </View>
   </View>
